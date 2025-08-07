@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/carousel/">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+  <style>
+    /* General Body and Container Resets */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5; /* Light grey background outside the main content */
+}
+
+.container-fluid {
+    width: 90%;
+    max-width: 1400px; /* Limit max width for better readability */
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Top Bar Styling */
+.top-bar {
+    background-color: #3b5c3b; /* Darker green from the image */
+    color: #fff;
+    font-size: 0.85em;
+    padding: 8px 0;
+}
+
+.top-bar-content {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top-left span {
+    margin-right: 20px;
+}
+
+.top-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.top-right a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.top-right a:hover {
+    color: #c0f0c0;
+}
+
+.top-right .lang-selector {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+/* Navigation Bar Styling */
+.navbar {
+    background-color: #4b734b; /* Medium green from the image */
+    padding: 10px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative; /* For z-index to keep it above hero if needed */
+    z-index: 1000;
+}
+
+.navbar-content {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    color: #fff;
+}
+
+.navbar-brand .logo {
+    height: 60px; /* Adjust as needed */
+    margin-right: 15px;
+}
+
+.brand-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    display: block;
+    line-height: 1;
+}
+
+.brand-subtitle {
+    font-size: 1.1em;
+    display: block;
+    line-height: 1;
+}
+
+.brand-department {
+    font-size: 0.8em;
+    display: block;
+    line-height: 1;
+}
+
+.nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+
+.nav-links li {
+    position: relative;
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 8px 0;
+    transition: color 0.3s ease;
+    display: flex; /* For dropdown arrow alignment */
+    align-items: center;
+}
+
+.nav-links a:hover {
+    color: #c0f0c0;
+}
+
+.dropdown-arrow {
+    font-size: 0.6em;
+    margin-left: 5px;
+    transition: transform 0.3s ease;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #4b734b;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 4px;
+    overflow: hidden;
+    top: 100%; /* Position below the parent link */
+    left: 0;
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: #5a855a;
+}
+
+.nav-links li.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.nav-links li.dropdown:hover .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+.ministry-logo img {
+    height: 70px; /* Adjust as needed */
+    border-radius: 50%; /* Makes it round */
+    background-color: #fff; /* White background for the logo */
+    padding: 5px; /* Space inside the border */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Hero Section */
+.hero-section {
+    background-image: url('image/Kochikhali-2.jpg'); /* Replace with your actual hero background image */
+    background-size: cover;
+    background-position: center;
+    height: 550px; /* Adjust height as needed */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    color: #fff;
+    text-align: center;
+    overflow: hidden; /* Ensure background doesn't overflow */
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.2)); /* Darken overlay to make text pop */
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-content h2 {
+    font-size: 3em;
+    margin: 5px 0;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-weight: bold;
+            color: #333;
+        }
+
+
+
+        /* new */
+        .stats-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 180px; /* Adjust as needed */
+        }
+        .stats-card img {
+            width: 80px; /* Adjust icon size */
+            height: 80px;
+            margin-bottom: 15px;
+            border-radius: 5px; /* Slightly rounded corners for the icons */
+            object-fit: cover;
+        }
+        .stats-card h3 {
+            font-size: 2.5rem; /* Large number */
+            color: #28a745; /* Green color for numbers */
+            margin-bottom: 5px;
+        }
+        .stats-card p {
+            font-size: 1.1rem; /* Text below number */
+            color: #6c757d;
+            margin-bottom: 0; /* Remove default paragraph margin */
+        }
+
+        
+        </style>
+
+        <body>
+            
+ <!-- top bar -->
+  <div class="top-bar">
+    <div class="container-fluid top-bar-content">
+      <div class="top-left">
+        <span>Save Sundarban, Love Humane Life</span>
+      </div>
+      <div class="top-right">
+        <span class="lang-selector">
+          <i class="fas fa-globe"></i> বাংলা
+        </span>
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-google-plus-g"></i></a>
+        <a href="form.html">Forum</a>
+        <a href="login.html">Login</a>
+        <a href="register.html">Register</a>
+      </div>
+    </div>
+  </div>
+  <!-- nabver -->
+  <nav class="navbar">
+    <div class="container-fluid navbar-content">
+      <div class="navbar-brand">
+        <img src="image/SNP_LOGO.png" alt="ECO-TOURISM SUNDARBAN Logo" class="logo">
+        <div>
+          <span class="brand-title">ECO-TOURISM</span>
+          <span class="brand-subtitle">SUNDARBAN</span>
+          <span class="brand-department">Forest Department</span>
+        </div>
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li class="dropdown">
+          <a href="#">Tour Operators <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+          <div class="dropdown-content">
+            <a href="#">Operator 1</a>
+            <a href="#">Operator 2</a>
+          </div>
+        </li>
+        <li><a href="register.html">Sports</a></li>
+        <li class="dropdown">
+          <a href="Packages.html">Ticket <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+          <div class="dropdown-content">
+            <a href="Packages.html">Book Ticket</a>
+            <a href="Packages.html">Ticket Info</a>
+          </div>
+        </li>
+        <li><a href="gallaries.html">Galleries</a></li>
+        <li><a href="Packages.html">Complaint</a></li>
+        <li class="dropdown">
+          <a href="Packages.html">Forest Division <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+          <div class="dropdown-content">
+            <a href="#">Division 1</a>
+            <a href="#">Division 2</a>
+          </div>
+        </li>
+        <li><a href="#"><i class="fas fa-search"></i></a></li>
+      </ul>
+      
+    </div>
+  </nav>
+  
+  <div class="hero-section">
+    <div class="hero-content">
+      <h2 style="color: #c6c9c6; text-align: left;">About</h2><br><h4 style="text-align: left; color: #c6c9c6;">Eco-tourism to protect the protected mangrove forests of the Sundarbans.</h4>
+     
+    </div>
+  </div>
+<br><br><br>
+  <!-- card -->
+  <section class="container my-5">
+    <h2 class="text-center mb-5">The Significance of Sundarbans</h2>
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <img src="image/About-side.webp" class="img-fluid rounded shadow-lg"
+          alt="Sundarban biodiversity and ecosystem">
+      </div>
+      <div class="col-md-6">
+        <p>The Sundarbans, a UNESCO World Heritage Site, is the largest contiguous mangrove forest in the world, spanning
+          parts of Bangladesh and India. It's a critical ecosystem, acting as a natural barrier against cyclones and tidal
+          surges, protecting millions of people in the coastal areas.</p>
+        <p>It is globally renowned for being the home of the Royal Bengal Tiger, but its biodiversity extends far beyond,
+          including various species of deer, crocodiles, dolphins, and a rich array of birdlife. Its unique amphibious
+          environment supports a delicate balance of flora and fauna found nowhere else on Earth.</p>
+        <p>Our commitment to eco-tourism aims to raise awareness about this precious natural resource and contribute to
+          its ongoing protection and research.</p>
+      </div>
+    </div>
+  </section>
+  
+  <section class="container my-5 text-center">
+    <h2>Our Dedicated Team</h2>
+    <p class="lead mb-4">Meet the passionate individuals who make your Sundarban journey exceptional.</p>
+    <div class="row justify-content-center">
+      <div class="col-md-3 col-sm-6 mb-4">
+        <div class="card h-100 border-0 shadow-sm">
+          <img src="image/rahim.jpeg" class="card-img-top rounded-circle mx-auto mt-3" alt="Team Member Name"
+            style="width: 120px; height: 120px; object-fit: cover;">
+          <div class="card-body">
+            <h5 class="card-title">Rahim Khan</h5>
+            <p class="card-text text-muted">Founder & Lead Guide</p>
+            <p class="small">With over 20 years exploring the Sundarbans, Rahim is a wealth of knowledge.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6 mb-4">
+        <div class="card h-100 border-0 shadow-sm">
+          <img src="image/farida begum.jpeg" class="card-img-top rounded-circle mx-auto mt-3" alt="Team Member Name"
+            style="width: 120px; height: 120px; object-fit: cover;">
+          <div class="card-body">
+            <h5 class="card-title">Fariha Begum</h5>
+            <p class="card-text text-muted">Operations Manager</p>
+            <p class="small">Ensuring seamless and comfortable experiences for all our guests.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6 mb-4">
+        <div class="card h-100 border-0 shadow-sm">
+          <img src="image/jamal uddin.jpeg" class="card-img-top rounded-circle mx-auto mt-3" alt="Team Member Name"
+            style="width: 120px; height: 120px; object-fit: cover;">
+          <div class="card-body">
+            <h5 class="card-title">Jamal Uddin</h5>
+            <p class="card-text text-muted">Local Community Liaison</p>
+            <p class="small">Connecting our tours with local heritage and sustainable practices.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+ <br><br>
+<!-- footer -->
+  <footer class="text-white py-5" style="background-color: #3b5c3b;">
+    <div class="container">
+      <div class="row gy-4">
+        <!-- Eco‑Tourism Overview -->
+        <div class="col-md-4">
+          <h5>Eco‑Tourism Sundarbans</h5>
+          <p class="small">
+            BFD-এর Eco‑Tourism প্রোগ্রামের অধীনে সুন্দরবনের বিভিন্ন ইকো‑ট্যুরিজম স্পটে উন্নত অভিনব ঘোরাঘুরি ও
+            পরিবেশ‑সুরক্ষা নিশ্চিত করা হয়।
+          </p>
+        </div>
+        <!-- Quick Links -->
+        <div class="col-md-2">
+          <h6>Quick Links</h6>
+          <ul class="list-unstyled small">
+            <li><a href="/" class="text-white text-decoration-none">Home</a></li>
+            <li><a href="/package" class="text-white text-decoration-none">Packages</a></li>
+            <li><a href="/spots" class="text-white text-decoration-none">Spots</a></li>
+            <li><a href="/one-day-tour-ticket" class="text-white text-decoration-none">Book Tour</a></li>
+          </ul>
+        </div>
+        <!-- Contact -->
+        <div class="col-md-3">
+          <h6>Contact Us</h6>
+          <p class="small mb-1">📍 BFD, Khulna</p>
+          <p class="small mb-1">📧 info@sundarbantourism.gov.bd</p>
+          <p class="small">📞 +880 41‑XXXXXXX</p>
+        </div>
+        <!-- Govt Links -->
+        <div class="col-md-3">
+          <h6>Government Links</h6>
+          <ul class="list-unstyled small">
+            <li><a href="https://bforest.gov.bd" class="text-white text-decoration-none">Forest Dept</a></li>
+            <li><a href="https://whc.unesco.org/en/list/452" class="text-white text-decoration-none">UNESCO</a></li>
+          </ul>
+        </div>
+      </div>
+  
+      <hr class="border-light my-4">
+  
+      <div class="d-flex justify-content-between small">
+        <p class="mb-0">&copy; 2025 Eco‑Tourism Sundarbans • BFD</p>
+        <p class="mb-0">
+          <a href="#top" class="text-white text-decoration-none">Back to top</a>
+          · <a href="/privacy" class="text-white text-decoration-none">Privacy Policy</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+        </body>
+        </html>

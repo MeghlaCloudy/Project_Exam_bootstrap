@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/carousel/">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+  <style>
+    /* General Body and Container Resets */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5; /* Light grey background outside the main content */
+}
+
+.container-fluid {
+    width: 90%;
+    max-width: 1400px; /* Limit max width for better readability */
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Top Bar Styling */
+.top-bar {
+    background-color: #3b5c3b; /* Darker green from the image */
+    color: #fff;
+    font-size: 0.85em;
+    padding: 8px 0;
+}
+
+.top-bar-content {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top-left span {
+    margin-right: 20px;
+}
+
+.top-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.top-right a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.top-right a:hover {
+    color: #c0f0c0;
+}
+
+.top-right .lang-selector {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+/* Navigation Bar Styling */
+.navbar {
+    background-color: #4b734b; /* Medium green from the image */
+    padding: 10px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative; /* For z-index to keep it above hero if needed */
+    z-index: 1000;
+}
+
+.navbar-content {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    color: #fff;
+}
+
+.navbar-brand .logo {
+    height: 60px; /* Adjust as needed */
+    margin-right: 15px;
+}
+
+.brand-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    display: block;
+    line-height: 1;
+}
+
+.brand-subtitle {
+    font-size: 1.1em;
+    display: block;
+    line-height: 1;
+}
+
+.brand-department {
+    font-size: 0.8em;
+    display: block;
+    line-height: 1;
+}
+
+.nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+
+.nav-links li {
+    position: relative;
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 8px 0;
+    transition: color 0.3s ease;
+    display: flex; /* For dropdown arrow alignment */
+    align-items: center;
+}
+
+.nav-links a:hover {
+    color: #c0f0c0;
+}
+
+.dropdown-arrow {
+    font-size: 0.6em;
+    margin-left: 5px;
+    transition: transform 0.3s ease;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #4b734b;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 4px;
+    overflow: hidden;
+    top: 100%; /* Position below the parent link */
+    left: 0;
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: #5a855a;
+}
+
+.nav-links li.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.nav-links li.dropdown:hover .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+.ministry-logo img {
+    height: 70px; /* Adjust as needed */
+    border-radius: 50%; /* Makes it round */
+    background-color: #fff; /* White background for the logo */
+    padding: 5px; /* Space inside the border */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Hero Section */
+.hero-section {
+    background-image: url('pkg-3.jpg'); /* Replace with your actual hero background image */
+    background-size: cover;
+    background-position: center;
+    height: 550px; /* Adjust height as needed */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    color: #fff;
+    text-align: center;
+    overflow: hidden; /* Ensure background doesn't overflow */
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.2)); /* Darken overlay to make text pop */
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-content h2 {
+    font-size: 3em;
+    margin: 5px 0;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-weight: bold;
+            color: #333;
+        }
+
+
+
+        /* new */
+        .stats-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 180px; /* Adjust as needed */
+        }
+        .stats-card img {
+            width: 80px; /* Adjust icon size */
+            height: 80px;
+            margin-bottom: 15px;
+            border-radius: 5px; /* Slightly rounded corners for the icons */
+            object-fit: cover;
+        }
+        .stats-card h3 {
+            font-size: 2.5rem; /* Large number */
+            color: #28a745; /* Green color for numbers */
+            margin-bottom: 5px;
+        }
+        .stats-card p {
+            font-size: 1.1rem; /* Text below number */
+            color: #6c757d;
+            margin-bottom: 0; /* Remove default paragraph margin */
+        }
+
+        
+        </style>
+
+        <body>
+            
+ <!-- top bar -->
+  <div class="top-bar">
+    <div class="container-fluid top-bar-content">
+      <div class="top-left">
+        <span>Save Sundarban, Love Humane Life</span>
+      </div>
+      <div class="top-right">
+        <span class="lang-selector">
+          <i class="fas fa-globe"></i> বাংলা
+        </span>
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-google-plus-g"></i></a>
+        <a href="form.html">Forum</a>
+        <a href="login.html">Login</a>
+        <a href="register.html">Register</a>
+      </div>
+    </div>
+  </div>
+  <!-- nabver -->
+  <nav class="navbar">
+    <div class="container-fluid navbar-content">
+      <div class="navbar-brand">
+        <img src="image/SNP_LOGO.png" alt="ECO-TOURISM SUNDARBAN Logo" class="logo">
+        <div>
+          <span class="brand-title">ECO-TOURISM</span>
+          <span class="brand-subtitle">SUNDARBAN</span>
+          <span class="brand-department">Forest Department</span>
+        </div>
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li class="dropdown">
+          <a href="about.html">Tour Operators <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+          <div class="dropdown-content">
+            <a href="about.html">Operator 1</a>
+            <a href="about.html">Operator 2</a>
+          </div>
+        </li>
+        <li><a href="register.html">Sports</a></li>
+        <li class="dropdown">
+          <a href="Packages.html">Ticket <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+          <div class="dropdown-content">
+            <a href="Packages.html">Book Ticket</a>
+            <a href="about.html">Ticket Info</a>
+          </div>
+        </li>
+        <li><a href="gallaries.html">Galleries</a></li>
+        <li><a href="gallaries.html">Complaint</a></li>
+        <li class="dropdown">
+          <a href="about.html">Forest Division <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+          <div class="dropdown-content">
+            <a href="about.html">Division 1</a>
+            <a href="about.html">Division 2</a>
+          </div>
+        </li>
+        <li><a href="about.html"><i class="fas fa-search"></i></a></li>
+      </ul>
+      
+    </div>
+  </nav>
+  
+  <div class="hero-section">
+    <div class="hero-content">
+      <h2 style="color: #c3ccc6; text-align: left;">Packages</h2>
+      <h4 style="color: #c3ccc6;">You should get overview of the SUNDARBAN before making a sundarban tour.</h4>
+     
+    </div>
+  </div>
+<br><br>
+  <!-- card -->
+     <div class="container d-flex" >
+    <div class="row">
+        <h1>Sundarban & Eco Resort Tour Package</h1>
+ <p>Our Sundarban Tour Package is the best to all because of pocket friendly within their budget. Our customers say that we are the best Sundarban Tour Package operator forever. We make a Sundarban Tour Packages itinerary where you can avail best value. To make your sundarban tour memorable we have developed many kinds of Sundarban Tour Packages. You should get overview of the SUNDARBAN before making a sundarban tour.</p>
+    <img src="image/Sundarban_pakage.png" alt="">
+    <p>We are such types of sundarban tour and travel operator who have the ability to arrange a sundarban trip for our guests from Dhaka, Khulna & Mongla.
+
+We have private sundarban tour packages in small group. You can make a customize Sundarban Tour Package. KITE BANGLADESH HOLIDAYS is the well known Sundarbans Tour Package Operator, we can make customize package from Dhaka, Khulna & Mongla. We have Sundarban Eco Resort tour package. If you have short time but still you wanna explore the SUNDARBAN, then you can visit most luxury Eco Resort in SUNDARBAN.</p>
+    </div>
+
+</div>
+<br>
+<div class="container d-flex" >
+    <div class="row">
+        <h1>Sundarban & Eco Resort Tour Package</h1>
+ <p>Our Sundarban Tour Package is the best to all because of pocket friendly within their budget. Our customers say that we are the best Sundarban Tour Package operator forever. We make a Sundarban Tour Packages itinerary where you can avail best value. To make your sundarban tour memorable we have developed many kinds of Sundarban Tour Packages. You should get overview of the SUNDARBAN before making a sundarban tour.
+  <br>
+ </p>
+    <img src="image/package-2.jpg" alt="">&nbsp;
+    <p>There are some luxury Eco Resort in SUNDARBAN. বনবাস - Banabash Eco Village; সুন্দরী - Sundori Eco Resort; ইরাবতী - Iraboti Eco Resort. KITE BANGLADESH HOLIDAYS is the official booking partner of all these Eco Resort. You can book all tour packages & also only rooms.</div>
+
+</div><br>
+<!-- package start -->
+<div class="container my-4">
+  <h1 class="text-center mb-4"><strong>Sundarban & Eco Resort Tour Package</strong></h1><br>
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        <img src="image/p-1.jpg" class="card-img-top" alt="Green background placeholder">
+
+
+        <div class="card-body d-flex flex-column">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <span class="badge bg-primary">3 Day 2 Night</span>
+            <span class="fw-bold text-success">৳ 12,000.00 to ৳ 13,800.00</span>
+          </div>
+          <h5 class="card-title mb-1">Explore the rain at Sundarban September 5/6/7</h5>
+          <p class="card-text text-muted mb-2 small">Sundarban Tour</p>
+          <p class="card-text flex-grow-1 small">
+            The largest mangrove forest in the world. The Sundarbans is the largest contiguous mangrove forest in the
+            world. It is a UNESCO World Heritage site and is densely covered by mangrove. The Sundarbans...
+          </p>
+          <div class="mt-auto d-flex justify-content-start">
+            <a href="#" class="btn btn-sm btn-outline-primary">Book Now</a>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        <img src="image/p-2.jpg" class="card-img-top" alt="Green background placeholder">
+        <div class="card-body d-flex flex-column">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <span class="badge bg-primary">3 Day 2 Night</span>
+            <span class="fw-bold text-success">৳ 12,000.00 to ৳ 13,800.00</span>
+          </div>
+          <h5 class="card-title mb-1">Explore the rain at Sundarban September 5/6/7</h5>
+          <p class="card-text text-muted mb-2 small">Sundarban Tour</p>
+          <p class="card-text flex-grow-1 small">
+            The largest mangrove forest in the world. The Sundarbans is the largest contiguous mangrove forest in the
+            world. It is a UNESCO World Heritage site and is densely covered by mangrove. The Sundarbans...
+          </p>
+          <div class="mt-auto d-flex justify-content-start">
+            <a href="#" class="btn btn-sm btn-outline-primary">Book Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        <img src="image/p-3.jpg" class="card-img-top" alt="Boat on top">
+        <div class="card-body d-flex flex-column">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <span class="badge bg-primary">3 Day 2 Night</span>
+            <span class="fw-bold text-success">৳ 15,000.00 to ৳ 16,000.00</span>
+          </div>
+          <h5 class="card-title mb-1">Sundarban Package Tour 14 October 2025</h5>
+          <p class="card-text text-muted mb-2 small">Sundarban Package Tour tonight dates – 01764504065</p>
+          <p class="card-text flex-grow-1 small">
+            আমাদের প্যাকেজ মূল্য প্রতিজন -15000 টাকা থেকে 16000 টাকা | এই প্যাকেজে আপনার ভ্রমণ সুন্দর হবে ও আপনি
+            সুন্দরবন উপভোগ করতে পারবেন। আপনি এই প্যাকেজে আরাম করে সুন্দরবন উপভোগ করতে পারবেন।
+          </p>
+          <div class="mt-auto d-flex justify-content-start">
+            <a href="#" class="btn btn-sm btn-outline-primary">Book Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        <img src="image/p-4.jpg" class="card-img-top" alt="M.V Bono Sampan Tour Package">
+        <div class="card-body d-flex flex-column">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <span class="badge bg-primary">3 Day 2 Night</span>
+            <span class="fw-bold text-success">৳ 14,000.00 to ৳ 16,000.00</span>
+          </div>
+          <h5 class="card-title mb-1">M.V Bono Sampan Tour Package - 01921138923</h5>
+          <p class="card-text text-muted mb-2 small">SUNDARBAN SAFE TOURS</p>
+          <p class="card-text flex-grow-1 small">
+            Sundarbans Tour Itinerary: Regions of tour: Southwestern Bangladesh, The Sundarbans, UNESCO World Heritage,
+            Land of Tiger, Attractions: &bull; Beautiful & picturesque of the largest Mangrove forest &bull; River
+            cruisin...
+          </p>
+          <div class="mt-auto d-flex justify-content-start">
+            <a href="#" class="btn btn-sm btn-outline-primary me-2">Book Now</a>
+            <a href="#" class="btn btn-sm btn-outline-secondary">Contact</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        <img src="image/p-5.jpg" class="card-img-top" alt="Best Tour Package Sundarban">
+        <div class="card-body d-flex flex-column">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <span class="badge bg-primary">3 Day 2 Night</span>
+            <span class="fw-bold text-success">৳ 16,000.00 to ৳ 18,000.00</span>
+          </div>
+          <h5 class="card-title mb-1">Best Tour Package Sundarban - 01921138923</h5>
+          <p class="card-text text-muted mb-2 small">SUNDARBAN SAFE TOURS</p>
+          <p class="card-text flex-grow-1 small">
+            Sundarban Package Tour - 01764504065 2 রাত 3 দিন খুলনা &amp; সুন্দরবন &amp; সুন্দরবন &amp; মংলা | যে
+            ফ্যাসিলিটি সমূহ বিদ্যমান ব্রেকফাস্ট, দুপুরের খাবার ও বিকালের চা/স্ন্যাক্স | বিশুদ্ধ খাবার পানি ও পর্যাপ্ত
+            পরিমান রিফ্রেশার জা...
+          </p>
+          <div class="mt-auto d-flex justify-content-start">
+            <a href="#" class="btn btn-sm btn-outline-primary me-2">Book Now</a>
+            <a href="#" class="btn btn-sm btn-outline-secondary">Contact</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        <img src="image/p-6.jpg" class="card-img-top" alt="Marian Sundarban Tour & Travel">
+        <div class="card-body d-flex flex-column">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <span class="badge bg-primary">3 Day 2 Night</span>
+            <span class="fw-bold text-success">৳ 16,000.00 to ৳ 17,000.00</span>
+          </div>
+          <h5 class="card-title mb-1">🌳 মে মাসের সুন্দরবন ভ্রমণে চলছে স্পেশাল অফার 🌳</h5>
+          <p class="card-text text-muted mb-2 small">Marian Sundarban Tour & Travel</p>
+          <p class="card-text flex-grow-1 small">
+            🌳 মে মাসে সুন্দরবন ভ্রমণে চলছে বিশাল ডিসকাউন্ট অফার 🌳 আমাদের বন ওসি এবং ওপি প্যাকেজ চলছে। &nbsp;১০ জনের
+            উপরে বুকিং করলে ১০-১৫% এর ডিসকাউন্ট থাকবে। &nbsp;১০-১৩ জনের গ্রুপ হলে আমাদের প্রিমিয়াম...
+          </p>
+          <div class="mt-auto d-flex justify-content-start">
+            <a href="register.html" class="btn btn-sm btn-outline-primary me-2">Book Now</a>
+           
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        <img src="image/p-7.jpg" class="card-img-top" alt="Sundarban Tour Package">
+        <div class="card-body d-flex flex-column">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <span class="badge bg-primary">3 Day 2 Night</span>
+            <span class="fw-bold text-success">৳ 21,000.00 to ৳ 23,000.00</span>
+          </div>
+          <h5 class="card-title mb-1">Sundarban Tour Package - 01921138923</h5>
+          <p class="card-text text-muted mb-2 small">SUNDARBAN SAFE TOURS</p>
+          <p class="card-text flex-grow-1 small">
+            DAY 1: THE PATH SUNDARBANS 01921138923 is the best option for Sundarban tour. DAY 2: THE PATH SUNDARBANS.
+            Sundarban tour itinerary: Early morning, start for Sundarban tour.
+          </p>
+          <div class="mt-auto d-flex justify-content-start">
+            <a href="register.html" class="btn btn-sm btn-outline-primary me-2">Book Now</a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        <img src="image/p-8.jpg" class="card-img-top" alt="Honey Hunting Adventure Tour">
+        <div class="card-body d-flex flex-column">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <span class="badge bg-primary">3 Day 2 Night</span>
+            <span class="fw-bold text-success">৳ 16,000.00 to ৳ 19,000.00</span>
+          </div>
+          <h5 class="card-title mb-1">🍯 Honey Hunting Adventure Tour in Sundarban 🍯</h5>
+          <p class="card-text text-muted mb-2 small">Sundarban Tour</p>
+          <p class="card-text flex-grow-1 small">
+            🍯 Honey Hunting Adventure Tour in Sundarban: সুন্দরবন হলো বাংলাদেশের দক্ষিণ-পশ্চিমাঞ্চলে অবস্থিত একটি
+            ম্যানগ্রোভ বন। সুন্দরবন বিভিন্ন প্রজাতির বন্যপ্রাণী ও উদ্ভিদের আশ্রয়স্থল। এই বন সুন্দরবনের...
+          </p>
+          <div class="mt-auto d-flex justify-content-start">
+            <a href="login.html" class="btn btn-sm btn-outline-primary me-2">Book Now</a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        <img src="image/p-9.jpeg" class="card-img-top" alt="Sundarban Package Tour">
+        <div class="card-body d-flex flex-column">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <span class="badge bg-primary">3 Day 2 Night</span>
+            <span class="fw-bold text-success">৳ 21,000.00 to ৳ 23,000.00</span>
+          </div>
+          <h5 class="card-title mb-1">Sundarban Package Tour - 01921138923</h5>
+          <p class="card-text text-muted mb-2 small">SUNDARBAN SAFE TOURS</p>
+          <p class="card-text flex-grow-1 small">
+            DAY 1: THE PATH SUNDARBANS 01921138923 is the best option for Sundarban tour. DAY 2: THE PATH SUNDARBANS.
+            Sundarban tour itinerary: Early morning, start for Sundarban tour.
+          </p>
+          <div class="mt-auto d-flex justify-content-start">
+            <a href="register.html" class="btn btn-sm btn-outline-primary me-2">Book Now</a>
+           
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<br>
+<!-- package close -->
+<div class="container text-center py-5">
+  <h2><strong>Description</strong></h2>
+  <br>
+  <p>The Sundarban is a region of mangroves formed as the Ganges, Brahmaputra, and Meghna rivers merge in the
+      Bay
+      of Bengal. The Sundarban Reserve Forest (SRF) is situated in Bangladesh and is the largest mangrove forest
+      globally. It extends from Bangladesh's Khulna division's Baleswar River to India's West Bengal state's Hooghly
+      River.By promoting responsible and sustainable tourism practices, the Sundarbans can continue to be a world-renowned
+      eco-tourism destination while also safeguarding its unique natural and cultural heritage.The Sundarban Reserve Forest is situated in Bangladesh and is the largest mangrove forest.
+
+  </p>
+  <br>
+</div>
+
+<!-- footer -->
+  <footer class="text-white py-5" style="background-color: #3b5c3b;">
+    <div class="container">
+      <div class="row gy-4">
+        <!-- Eco‑Tourism Overview -->
+        <div class="col-md-4">
+          <h5>Eco‑Tourism Sundarbans</h5>
+          <p class="small">
+            BFD-এর Eco‑Tourism প্রোগ্রামের অধীনে সুন্দরবনের বিভিন্ন ইকো‑ট্যুরিজম স্পটে উন্নত অভিনব ঘোরাঘুরি ও
+            পরিবেশ‑সুরক্ষা নিশ্চিত করা হয়।
+          </p>
+        </div>
+        <!-- Quick Links -->
+        <div class="col-md-2">
+          <h6>Quick Links</h6>
+          <ul class="list-unstyled small">
+            <li><a href="/" class="text-white text-decoration-none">Home</a></li>
+            <li><a href="/package" class="text-white text-decoration-none">Packages</a></li>
+            <li><a href="/spots" class="text-white text-decoration-none">Spots</a></li>
+            <li><a href="/one-day-tour-ticket" class="text-white text-decoration-none">Book Tour</a></li>
+          </ul>
+        </div>
+        <!-- Contact -->
+        <div class="col-md-3">
+          <h6>Contact Us</h6>
+          <p class="small mb-1">📍 BFD, Khulna</p>
+          <p class="small mb-1">📧 info@sundarbantourism.gov.bd</p>
+          <p class="small">📞 +880 41‑XXXXXXX</p>
+        </div>
+        <!-- Govt Links -->
+        <div class="col-md-3">
+          <h6>Government Links</h6>
+          <ul class="list-unstyled small">
+            <li><a href="https://bforest.gov.bd" class="text-white text-decoration-none">Forest Dept</a></li>
+            <li><a href="https://whc.unesco.org/en/list/452" class="text-white text-decoration-none">UNESCO</a></li>
+          </ul>
+        </div>
+      </div>
+  
+      <hr class="border-light my-4">
+  
+      <div class="d-flex justify-content-between small">
+        <p class="mb-0">&copy; 2025 Eco‑Tourism Sundarbans • BFD</p>
+        <p class="mb-0">
+          <a href="#top" class="text-white text-decoration-none">Back to top</a>
+          · <a href="/privacy" class="text-white text-decoration-none">Privacy Policy</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+        </body>
+        </html>
